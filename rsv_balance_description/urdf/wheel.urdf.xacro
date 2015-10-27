@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+  <xacro:macro name="wheel" params="prefix reflect color">
+    <link name="${prefix}_wheel">
+      <visual>
+      <geometry>
+        <mesh filename="package://rsv_balance_description/meshes/wheel.stl"/>
+      </geometry>
+      <material name="${color}"/>
+      </visual>
+      <collision name="${prefix}_wheel">
+        <geometry>
+          <cylinder length="${wheel_width}" radius="${wheel_radius}"/>
+        </geometry>
+      </collision>
+      <xacro:cyl_inertia mass="${wheel_mass}" height="${wheel_width}" radius="${wheel_radius}"/>
+      <self_collide>0</self_collide>
+    </link>
+    <joint name="base_to_${prefix}_wheel" type="continuous">
+      <parent link="base_link"/>
+      <child link="${prefix}_wheel"/>
+      <axis xyz="0 0 1"/>
+      <origin xyz="0 ${reflect*(base_width/2+wheel_width/2)} 0" rpy="${reflect*1.57} 0 0"/>
+    </joint>
+  </xacro:macro>
+</robot>

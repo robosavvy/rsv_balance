@@ -1,0 +1,56 @@
+<?xml version="1.0"?>
+  
+<robot name="balance" xmlns:xacro="http://www.ros.org/wiki/xacro">
+  <xacro:include filename="$(find rsv_balance_description)/urdf/balance.urdf.xacro" />
+  <xacro:balance/> 
+  
+  <xacro:property name="rod_length" value=".95" />
+  <xacro:property name="rod_radius" value=".025" />
+  <xacro:property name="rod_shift" value="-.035" />
+  <xacro:property name="rod_mass" value=".5" />
+  
+  <xacro:property name="weight_radius" value="0.15" />
+  <xacro:property name="weight_mass" value="5.6" />
+  
+  <link name="rod_link">
+    <visual>
+      <geometry>
+        <cylinder length="${rod_length}" radius="${rod_radius}"/>
+      </geometry>
+      <material name="grey"/>
+    </visual>
+    <collision>
+      <geometry>
+        <cylinder length="${rod_length}" radius="${rod_radius}"/>
+      </geometry>
+    </collision>
+    <xacro:cyl_inertia mass="${rod_mass}" height="${rod_length}" radius="${rod_radius}"/>
+    <self_collide>0</self_collide>
+  </link>
+  <joint name="base_to_rod" type="fixed">
+    <parent link="base_link"/>
+    <child link="rod_link"/>
+    <origin xyz="${rod_shift} 0 ${rod_length/2}" rpy="0 0 0"/>
+  </joint>
+  
+  <link name="weight_link">
+    <visual>
+      <geometry>
+        <sphere radius="${weight_radius}"/>
+      </geometry>
+      <material name="black"/>
+    </visual>
+    <collision>
+      <geometry>
+        <sphere radius="${weight_radius}"/>
+      </geometry>
+    </collision>
+    <self_collide>0</self_collide>
+    <xacro:sphere_inertia m="${weight_mass}" r="${weight_radius}"/>
+  </link>
+  <joint name="rod_to_weight" type="fixed">
+    <parent link="rod_link"/>
+    <child link="weight_link"/>
+    <origin xyz=".0 0 ${rod_length/2}" rpy="0 0 0"/>
+  </joint>
+</robot>

@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+
+<!--RoboSavvy balancing platform description -->
+
+<launch>
+  <arg name="tf_prefix" default=""/>
+  
+  <param name="robot_description" command="$(find xacro)/xacro --inorder '$(find rsv_balance_description)/urdf/robot.urdf.xacro'" />
+  
+  <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher">
+    <param name="tf_prefix" value="$(arg tf_prefix)"/>
+  </node>
+</launch>

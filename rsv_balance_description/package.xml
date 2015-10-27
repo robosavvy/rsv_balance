@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<package>
+  <name>rsv_balance_description</name>
+  <version>0.0.1</version>
+  <description>RoboSavvy's balancing platform URDF description and meshes.</description>
+
+  <maintainer email="vmatos@robosavvy.com">Vitor Matos</maintainer>
+  <license>BSD</license>
+  <url type="website">http://wiki.ros.org/Robots/RoboSavvyBalance</url>
+  <url type="repository">https://github.com/robosavvy/rsv_balance</url>
+  <author email="vmatos@robosavvy.com">Vitor Matos</author>
+  
+  <buildtool_depend>catkin</buildtool_depend>
+  <build_depend>roslaunch</build_depend>
+  <run_depend>robot_state_publisher</run_depend>
+  <run_depend>urdf</run_depend>
+  <run_depend>xacro</run_depend>
+</package>

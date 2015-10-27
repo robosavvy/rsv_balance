@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+  
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+  <xacro:property name="base_length" value=".26" />
+  <xacro:property name="base_width" value=".42" />
+  <xacro:property name="base_heigth" value=".26" />
+  <xacro:property name="base_mass" value="23." />
+  <xacro:property name="base_cm" value="-.08" />
+  
+  <xacro:property name="wheel_radius" value=".19" />
+  <xacro:property name="wheel_width" value=".08" />
+  <xacro:property name="wheel_mass" value="2.6" />
+    
+  <xacro:macro name="balance">
+    <xacro:include filename="$(find rsv_balance_description)/urdf/materials.xacro" />
+    <xacro:include filename="$(find rsv_balance_description)/urdf/inertias.xacro" />
+    <xacro:include filename="$(find rsv_balance_description)/urdf/wheel.urdf.xacro" />
+
+    <link name="base_link">
+      <visual>
+        <geometry>
+          <mesh filename="package://rsv_balance_description/meshes/platform.stl"/>
+        </geometry>
+        <material name="grey"/>
+      </visual>
+      <collision>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <geometry>
+          <box size="${base_length} ${base_width} ${base_heigth}"/>
+        </geometry>
+      </collision>
+      <self_collide>0</self_collide>
+      <xacro:box_inertia m="${base_mass}" w="${base_width}" d="${base_length}" h="${base_heigth}" x="0" y="0" z="${base_cm}"/>
+    </link>
+
+    <xacro:wheel prefix="left" reflect="1" color="red"/>
+    <xacro:wheel prefix="right" reflect="-1" color="green"/>
+  </xacro:macro>
+</robot>
