@@ -10,12 +10,12 @@
   <xacro:property name="wheel_radius" value=".19" />
   <xacro:property name="wheel_width" value=".08" />
   <xacro:property name="wheel_mass" value="2.6" />
-    
+  
+  <xacro:include filename="$(find rsv_balance_description)/urdf/inertias.xacro" />
+  <xacro:include filename="$(find rsv_balance_description)/urdf/materials.xacro" />
+  <xacro:include filename="$(find rsv_balance_description)/urdf/wheel.urdf.xacro" />
+   
   <xacro:macro name="balance">
-    <xacro:include filename="$(find rsv_balance_description)/urdf/materials.xacro" />
-    <xacro:include filename="$(find rsv_balance_description)/urdf/inertias.xacro" />
-    <xacro:include filename="$(find rsv_balance_description)/urdf/wheel.urdf.xacro" />
-
     <link name="base_link">
       <visual>
         <geometry>
